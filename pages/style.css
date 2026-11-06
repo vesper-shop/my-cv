@@ -103,7 +103,7 @@
   }
 
   .tag {
-    @apply rounded-full border px-2.5 py-0.5 text-sm;
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-sm;
     border-color: var(--color-line);
     background: var(--color-surface);
     color: var(--color-body);
@@ -228,5 +228,65 @@
 @media (prefers-reduced-motion: reduce) {
   .revealed {
     animation: none;
+  }
+}
+
+/* Export PDF prints the page as shown: A4, light, without controls or motion. */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 16mm;
+  }
+
+  :root,
+  .theme {
+    color-scheme: light !important;
+    background: white !important;
+  }
+
+  .theme {
+    font-size: 9.5pt;
+    line-height: 1.45;
+  }
+
+  main {
+    padding: 0 !important;
+    max-width: none !important;
+    gap: 1.25rem !important;
+  }
+
+  main section {
+    gap: 0.6rem !important;
+  }
+
+  main section > ul {
+    gap: 0.75rem !important;
+  }
+
+  h1 {
+    font-size: 20pt !important;
+  }
+
+  .section-title {
+    break-after: avoid;
+    padding-bottom: 0.25rem;
+  }
+
+  .locked-overlay {
+    display: none;
+  }
+
+  section,
+  .points > li {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  li {
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none;
   }
 }

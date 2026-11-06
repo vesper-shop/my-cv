@@ -15,6 +15,7 @@ export interface Messages {
   hide: string;
   toggleTheme: string;
   switchLocale: string;
+  exportPdf: string;
 }
 
 export const MESSAGES: Record<Locale, Messages> = {
@@ -33,6 +34,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     hide: "Hide details",
     toggleTheme: "Toggle theme",
     switchLocale: "中文",
+    exportPdf: "Export PDF",
   },
   zh: {
     title: "简历",
@@ -48,5 +50,6 @@ export const MESSAGES: Record<Locale, Messages> = {
     hide: "重新隐藏",
     toggleTheme: "切换主题",
     switchLocale: "English",
+    exportPdf: "导出 PDF",
   },
 };

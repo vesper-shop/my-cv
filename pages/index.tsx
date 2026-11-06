@@ -8,9 +8,42 @@ import {
   Mail,
   Moon,
   Phone,
+  Printer,
   Sun,
 } from "lucide-react";
 import { MotionConfig, motion } from "motion/react";
+import {
+  siCloudflare,
+  siCloudflareworkers,
+  siCplusplus,
+  siDocker,
+  siDrizzle,
+  siElectron,
+  siExpo,
+  siGithubactions,
+  siGo,
+  siHono,
+  siJavascript,
+  siModelcontextprotocol,
+  siMongodb,
+  siMysql,
+  siNextdotjs,
+  siNginx,
+  siNodedotjs,
+  siOpenjdk,
+  siPostgresql,
+  siPython,
+  siPytorch,
+  siReact,
+  siSolid,
+  siSpringboot,
+  siSqlite,
+  siSvelte,
+  siTailwindcss,
+  siTypescript,
+  siVuedotjs,
+  type SimpleIcon,
+} from "simple-icons";
 import type { ReactNode, SVGProps } from "react";
 import { useFormStatus } from "react-dom";
 import type { EntryView, LinkView, Rich } from "../lib/cv";
@@ -73,6 +106,53 @@ function ContactIcon({ href }: { href: string | null }) {
   if (host === "github.com") return <GitHubMark className={className} aria-hidden />;
   if (host === "x.com") return <XMark className={className} aria-hidden />;
   return <Globe className={className} aria-hidden />;
+}
+
+/** Brand marks for skill tags, keyed by the tag text; tags without one show text only. */
+const SKILL_ICONS: Record<string, SimpleIcon> = {
+  TypeScript: siTypescript,
+  JavaScript: siJavascript,
+  Java: siOpenjdk,
+  Python: siPython,
+  Go: siGo,
+  "C++": siCplusplus,
+  React: siReact,
+  "React Native": siReact,
+  "Next.js": siNextdotjs,
+  "Vue 3": siVuedotjs,
+  SvelteKit: siSvelte,
+  SolidJS: siSolid,
+  Electron: siElectron,
+  Expo: siExpo,
+  "Tailwind CSS": siTailwindcss,
+  "Node.js": siNodedotjs,
+  Hono: siHono,
+  "Spring Boot": siSpringboot,
+  PostgreSQL: siPostgresql,
+  MySQL: siMysql,
+  MongoDB: siMongodb,
+  SQLite: siSqlite,
+  "Cloudflare D1": siCloudflare,
+  "Drizzle ORM": siDrizzle,
+  Docker: siDocker,
+  Nginx: siNginx,
+  "Cloudflare Workers": siCloudflareworkers,
+  R2: siCloudflare,
+  KV: siCloudflare,
+  "CI/CD": siGithubactions,
+  PyTorch: siPytorch,
+  MCP: siModelcontextprotocol,
+};
+
+function SkillIcon({ tag }: { tag: Rich }) {
+  const name = tag.map((segment) => (segment.kind === "text" ? segment.text : "")).join("");
+  if (!Object.hasOwn(SKILL_ICONS, name)) return null;
+  const icon = SKILL_ICONS[name]!;
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="size-3.5 shrink-0" aria-hidden>
+      <path d={icon.path} />
+    </svg>
+  );
 }
 
 function Link({ link }: { link: LinkView }) {
@@ -140,6 +220,7 @@ function Entry({ entry }: { entry: EntryView }) {
         <ul className="mt-1 flex flex-wrap gap-1.5">
           {entry.tags.map((tag, index) => (
             <li key={index} className="tag">
+              <SkillIcon tag={tag} />
               <RichText value={tag} />
             </li>
           ))}
@@ -224,7 +305,11 @@ export default function CvPage({ access, locale, theme, cv }: Props) {
   return (
     <MotionConfig reducedMotion="user">
       <div className="theme" data-theme={theme}>
-        <nav className="mx-auto flex max-w-2xl justify-end gap-1 px-6 pt-6">
+        <nav className="mx-auto flex max-w-2xl justify-end gap-1 px-6 pt-6 print:hidden">
+          <button type="button" className="toolbar-button" onClick={() => print()}>
+            <Printer className="size-4" aria-hidden />
+            {messages.exportPdf}
+          </button>
           <button
             type="button"
             className="toolbar-button"
@@ -277,7 +362,7 @@ export default function CvPage({ access, locale, theme, cv }: Props) {
               ))}
             </ul>
             {access !== null && (
-              <p className="flex items-center gap-2 text-sm text-muted">
+              <p className="flex items-center gap-2 text-sm text-muted print:hidden">
                 <span className="unlocked-dot" aria-hidden />
                 {messages.unlockedAs(access)}
                 <span aria-hidden>·</span>
