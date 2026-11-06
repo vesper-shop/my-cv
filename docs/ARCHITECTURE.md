@@ -38,6 +38,7 @@ While locked, each span becomes `{ kind: "hidden", width }`, its width in `ch` w
 keeps its shape without the text. While locked, the page shows
 the header, summary, and first section, and blurs the remaining (already redacted) sections behind
 the inline unlock form. Contacts and entry links lose their `href` when their label hides
-a span. `role`, `period`, `link`, and `tags` are required and `null` when absent. A skills row sets `role`,
-`period`, and `link` to `null`, leaves `points` empty, and lists its items as `tags`, which render as
-chips.
+a span. `role`, `period`, and `tags` are required and `null` when absent; `links` and `points` are lists that
+may be empty. A skills row sets `role` and `period` to `null`, leaves `links` and `points` empty, and
+lists its items as `tags`, which render as chips. An entry's links, such as a repository and an event
+site, share one line under its role.

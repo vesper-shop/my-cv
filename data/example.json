@@ -22,7 +22,7 @@
           "title": "[[Example University]]",
           "role": "BSc Computer Science",
           "period": "2023 — 2027",
-          "link": null,
+          "links": [],
           "points": ["[[First-class]] average so far."],
           "tags": null
         }
@@ -35,7 +35,7 @@
           "title": "[[Example Labs]]",
           "role": "Software Engineer Intern",
           "period": "2025.06 — 2025.08",
-          "link": null,
+          "links": [],
           "points": [
             "Built the [[billing]] dashboard and cut first render on large accounts by [[40]]%.",
             "Led a [[3]]-person team that shipped the public API."
@@ -51,10 +51,12 @@
           "title": "Example CLI",
           "role": "Maintainer",
           "period": "2024 — Present",
-          "link": {
-            "label": "github.com/example/cli",
-            "href": "https://github.com/example/cli"
-          },
+          "links": [
+            {
+              "label": "github.com/example/cli",
+              "href": "https://github.com/example/cli"
+            }
+          ],
           "points": ["A terminal client with [[1.2k]] stars and plugin hooks."],
           "tags": null
         }

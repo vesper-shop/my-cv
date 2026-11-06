@@ -44,7 +44,7 @@ const entrySchema = z.object({
   title: z.string(),
   role: z.string().nullable(),
   period: z.string().nullable(),
-  link: linkSchema.nullable(),
+  links: z.array(linkSchema),
   points: z.array(z.string()),
   tags: z.array(z.string()).nullable(),
 });
@@ -82,7 +82,7 @@ export interface EntryView {
   title: Rich;
   role: Rich | null;
   period: Rich | null;
-  link: LinkView | null;
+  links: LinkView[];
   points: Rich[];
   tags: Rich[] | null;
 }
@@ -141,7 +141,7 @@ export function viewCv(cv: Cv, unlocked: boolean): CvView {
         title: rich(entry.title, unlocked),
         role: entry.role === null ? null : rich(entry.role, unlocked),
         period: entry.period === null ? null : rich(entry.period, unlocked),
-        link: entry.link === null ? null : link(entry.link, unlocked),
+        links: entry.links.map((source) => link(source, unlocked)),
         points: entry.points.map((point) => rich(point, unlocked)),
         tags: entry.tags === null ? null : entry.tags.map((tag) => rich(tag, unlocked)),
       })),

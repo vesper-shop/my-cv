@@ -115,14 +115,16 @@ function Entry({ entry }: { entry: EntryView }) {
           </span>
         )}
       </div>
-      {(entry.role || entry.link) && (
-        <p className="flex flex-wrap gap-x-3 text-sm text-muted">
-          {entry.role && (
-            <span>
-              <RichText value={entry.role} />
-            </span>
-          )}
-          {entry.link && <Link link={entry.link} />}
+      {entry.role && (
+        <p className="text-sm text-muted">
+          <RichText value={entry.role} />
+        </p>
+      )}
+      {entry.links.length > 0 && (
+        <p className="flex flex-wrap gap-x-4 text-sm">
+          {entry.links.map((link, index) => (
+            <Link key={index} link={link} />
+          ))}
         </p>
       )}
       {entry.points.length > 0 && (
