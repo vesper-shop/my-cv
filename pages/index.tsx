@@ -1,6 +1,7 @@
 import { Form, action, useForm } from "@void/react";
 import {
   ArrowRight,
+  Download,
   Globe,
   Languages,
   LoaderCircle,
@@ -8,7 +9,6 @@ import {
   Mail,
   Moon,
   Phone,
-  Printer,
   Sun,
 } from "lucide-react";
 import { MotionConfig, motion } from "motion/react";
@@ -46,12 +46,12 @@ import {
 } from "simple-icons";
 import type { ReactNode, SVGProps } from "react";
 import { useFormStatus } from "react-dom";
-import type { EntryView, LinkView, Rich } from "../lib/cv";
-import { MESSAGES, type Messages } from "../lib/i18n";
+import { MESSAGES } from "../lib/i18n";
+import type { EntryView, LinkView, Messages, Rich } from "../lib/types";
 import type { Props } from "./index.server";
 import "./style.css";
 
-/** Stand-in glyphs for a hidden span; the server sends only its width, never the text. */
+/* The server sends only a hidden span's width, so these glyphs stand in for it. */
 const FILLER =
   "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor ".repeat(8);
 
@@ -71,7 +71,6 @@ function RichText({ value }: { value: Rich }) {
   );
 }
 
-/** Sections rise in one after another; `order` is a section's place on the page. */
 function rise(order: number) {
   return {
     initial: { opacity: 0, y: 14 },
@@ -96,7 +95,6 @@ function XMark(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-/** The icon for a contact, read from its link; a withheld link shows a lock, revealing nothing. */
 function ContactIcon({ href }: { href: string | null }) {
   const className = "size-3.5 shrink-0";
   if (href === null) return <Lock className={className} aria-hidden />;
@@ -108,7 +106,6 @@ function ContactIcon({ href }: { href: string | null }) {
   return <Globe className={className} aria-hidden />;
 }
 
-/** Brand marks for skill tags, keyed by the tag text; tags without one show text only. */
 const SKILL_ICONS: Record<string, SimpleIcon> = {
   TypeScript: siTypescript,
   JavaScript: siJavascript,
@@ -305,11 +302,13 @@ export default function CvPage({ access, locale, theme, cv }: Props) {
   return (
     <MotionConfig reducedMotion="user">
       <div className="theme" data-theme={theme}>
-        <nav className="mx-auto flex max-w-2xl justify-end gap-1 px-6 pt-6 print:hidden">
-          <button type="button" className="toolbar-button" onClick={() => print()}>
-            <Printer className="size-4" aria-hidden />
-            {messages.exportPdf}
-          </button>
+        <nav className="mx-auto flex max-w-2xl justify-end gap-1 px-6 pt-6">
+          {access !== null && (
+            <a href="/pdf" download className="toolbar-button">
+              <Download className="size-4" aria-hidden />
+              {messages.downloadPdf}
+            </a>
+          )}
           <button
             type="button"
             className="toolbar-button"
@@ -362,7 +361,7 @@ export default function CvPage({ access, locale, theme, cv }: Props) {
               ))}
             </ul>
             {access !== null && (
-              <p className="flex items-center gap-2 text-sm text-muted print:hidden">
+              <p className="flex items-center gap-2 text-sm text-muted">
                 <span className="unlocked-dot" aria-hidden />
                 {messages.unlockedAs(access)}
                 <span aria-hidden>·</span>

@@ -191,6 +191,18 @@ importers:
         specifier: 4.6.7
         version: 4.6.7
     devDependencies:
+      '@expo-google-fonts/inter':
+        specifier: 0.4.2
+        version: 0.4.2
+      '@expo-google-fonts/noto-sans-sc':
+        specifier: 0.4.4
+        version: 0.4.4
+      '@formepdf/core':
+        specifier: 0.30.0
+        version: 0.30.0(react@19.3.1)
+      '@formepdf/react':
+        specifier: 0.30.0
+        version: 0.30.0(react@19.3.1)
       '@tailwindcss/vite':
         specifier: 4.3.4
         version: 4.3.4(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(typescript@7.0.2)(yaml@2.9.1))
@@ -212,6 +224,9 @@ importers:
       tailwindcss:
         specifier: 4.3.4
         version: 4.3.4
+      tsx:
+        specifier: 4.23.15
+        version: 4.23.15
       typescript:
         specifier: 7.0.2
         version: 7.0.2
@@ -915,6 +930,25 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@expo-google-fonts/inter@0.4.2':
+    resolution: {integrity: sha512-syfiImMaDmq7cFi0of+waE2M4uSCyd16zgyWxdPOY7fN2VBmSLKEzkfbZgeOjJq61kSqPBNNtXjggiQiSD6gMQ==}
+
+  '@expo-google-fonts/noto-sans-sc@0.4.4':
+    resolution: {integrity: sha512-LF4+p6xdtgUArufW0K+l9/FeDiXrW8FcEkEbOPIUC5ZnPupeFVA6yY9qCZ0sBrdAeLdlusDhv0R7q2x3onXo3w==}
+
+  '@formepdf/core@0.30.0':
+    resolution: {integrity: sha512-XIjXYirep3uRjXb7Royafqmi4mYn3SObGxr94oTv/0mDnso495iTN04PnJhzenuHAHIiStgPX0vNZv8zFOKT1g==}
+    peerDependencies:
+      react: ^18 || ^19
+
+  '@formepdf/react@0.30.0':
+    resolution: {integrity: sha512-iYTTPyQpEbvtdyi3rWBHBMZg707IhUt1MxXtMmW9QqJAMitujJKIj2KPexYkdzc2BDPMl1MTx7vXOc8Vv6JfeA==}
+    peerDependencies:
+      react: ^18 || ^19
+
+  '@formepdf/shared@0.30.0':
+    resolution: {integrity: sha512-HwOdS3mHfyJW24JJgpu7QcTQuSXNYHl8vOKPgbqrG7SMZy2hey/lRjFY1k4ou6VgTtXXw1fLFgjYhuWj8uEF2g==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -2423,6 +2457,10 @@ packages:
     resolution: {integrity: sha512-PPnnSJq3azKOIewXR/uppBV/6h98dprBJ/WaQ9Qgj10xX1lJLNfg+XShpbsrSqcDSy2yYYyhfXM1wWhftqgyzw==}
     engines: {node: '>=10.13.0'}
 
+  entities@6.0.1:
+    resolution: {integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==}
+    engines: {node: '>=0.12'}
+
   environment@1.1.0:
     resolution: {integrity: sha512-xUtoPkMggbz0MPyPiIWr1Kp4aeWJjDZ6SMvURhimjdZgsRuDplF5/s9hcgGhyXMhs+6vpnuoiZ2kFiu3FMnS8Q==}
     engines: {node: '>=18'}
@@ -2764,6 +2802,9 @@ packages:
         optional: true
       vite-plus:
         optional: true
+
+  parse5@7.3.0:
+    resolution: {integrity: sha512-IInvU7fabl34qmi9gY8XOVxhYyMyuH2xUNpb2q8/Y+7552KlejkRvqvD19nMoUW/uQGGbqNpA6Tufu5FL5BZgw==}
 
   pathe@2.0.3:
     resolution: {integrity: sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w==}
@@ -3593,6 +3634,24 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.2':
     optional: true
+
+  '@expo-google-fonts/inter@0.4.2': {}
+
+  '@expo-google-fonts/noto-sans-sc@0.4.4': {}
+
+  '@formepdf/core@0.30.0(react@19.3.1)':
+    dependencies:
+      '@formepdf/react': 0.30.0(react@19.3.1)
+      react: 19.3.1
+
+  '@formepdf/react@0.30.0(react@19.3.1)':
+    dependencies:
+      '@formepdf/shared': 0.30.0
+      react: 19.3.1
+
+  '@formepdf/shared@0.30.0':
+    dependencies:
+      parse5: 7.3.0
 
   '@img/colour@1.1.0': {}
 
@@ -4513,6 +4572,8 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.3.3
 
+  entities@6.0.1: {}
+
   environment@1.1.0: {}
 
   error-stack-parser-es@1.0.5: {}
@@ -4900,6 +4961,10 @@ snapshots:
       '@oxlint/binding-win32-x64-msvc': 1.91.0
       oxlint-tsgolint: 7.0.2005
       vite-plus: 1.5.0(@types/node@26.6.6)(@vitest/ui@5.1.0)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(typescript@7.0.2)(yaml@2.9.1)
+
+  parse5@7.3.0:
+    dependencies:
+      entities: 6.0.1
 
   pathe@2.0.3: {}
 

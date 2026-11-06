@@ -1,22 +1,4 @@
-import type { Version } from "./cv";
-import type { Locale } from "./preferences";
-
-export interface Messages {
-  title: string;
-  description: string;
-  summary: string;
-  hireTitle: string;
-  codePlaceholder: string;
-  unlock: string;
-  checking: string;
-  codeRequired: string;
-  codeRejected: string;
-  unlockedAs: (version: Version) => string;
-  hide: string;
-  toggleTheme: string;
-  switchLocale: string;
-  exportPdf: string;
-}
+import type { Locale, Messages } from "./types";
 
 export const MESSAGES: Record<Locale, Messages> = {
   en: {
@@ -34,7 +16,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     hide: "Hide details",
     toggleTheme: "Toggle theme",
     switchLocale: "中文",
-    exportPdf: "Export PDF",
+    downloadPdf: "Download PDF",
   },
   zh: {
     title: "简历",
@@ -50,6 +32,6 @@ export const MESSAGES: Record<Locale, Messages> = {
     hide: "重新隐藏",
     toggleTheme: "切换主题",
     switchLocale: "English",
-    exportPdf: "导出 PDF",
+    downloadPdf: "下载 PDF",
   },
 };

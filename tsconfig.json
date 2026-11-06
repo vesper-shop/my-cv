@@ -12,5 +12,5 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "include": ["lib", "pages", "scripts"]
+  "include": ["lib", "pages", "routes", "scripts"]
 }

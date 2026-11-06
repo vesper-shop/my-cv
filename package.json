@@ -11,7 +11,7 @@
     "lint": "void prepare && vp lint",
     "format": "vp fmt",
     "postinstall": "void prepare",
-    "cv": "node scripts/cv.ts"
+    "cv": "tsx scripts/cv.ts"
   },
   "dependencies": {
     "hono": "4.13.16",
@@ -23,6 +23,10 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
+    "@expo-google-fonts/inter": "0.4.2",
+    "@expo-google-fonts/noto-sans-sc": "0.4.4",
+    "@formepdf/core": "0.30.0",
+    "@formepdf/react": "0.30.0",
     "@tailwindcss/vite": "4.3.4",
     "@types/node": "26.6.6",
     "@types/react": "19.3.0",
@@ -30,6 +34,7 @@
     "@void/react": "1.6.1",
     "oxc-transform-react": "0.152.0",
     "tailwindcss": "4.3.4",
+    "tsx": "4.23.15",
     "typescript": "7.0.2",
     "vite": "npm:@voidzero-dev/vite-plus-core@1.5.0",
     "vite-plus": "1.5.0",
