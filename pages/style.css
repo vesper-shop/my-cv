@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Noto Sans SC", sans-serif;
+  --color-paper: light-dark(#fbfbfa, #0f0f11);
+  --color-surface: light-dark(#ffffff, #18181b);
+  --color-ink: light-dark(#18181b, #f4f4f5);
+  --color-body: light-dark(#3f3f46, #d4d4d8);
+  --color-muted: light-dark(#71717a, #a1a1aa);
+  --color-line: light-dark(#e4e4e7, #2e2e33);
+  --color-hover: light-dark(#f4f4f5, #232327);
+  --color-danger: light-dark(#b42318, #f97066);
+  --color-success: light-dark(#16a34a, #4ade80);
+}
+
+/* Every colour is a light-dark() pair; the theme only picks the colour scheme. */
+@layer base {
+  .theme[data-theme="system"] {
+    color-scheme: light dark;
+  }
+
+  .theme[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  .theme[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  /* The page root follows the theme too, so overscroll never shows the other scheme. */
+  :root:has(.theme[data-theme="system"]) {
+    color-scheme: light dark;
+  }
+
+  :root:has(.theme[data-theme="dark"]) {
+    color-scheme: dark;
+  }
+
+  html {
+    background: var(--color-paper);
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .theme {
+    min-height: 100dvh;
+    background: var(--color-paper);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-line);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 150ms;
+  }
+
+  a:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+@layer components {
+  /* The theme button shows the icon of the scheme it switches to. */
+  .theme[data-theme="light"] .when-dark,
+  .theme[data-theme="dark"] .when-light {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .theme[data-theme="system"] .when-light {
+      display: none;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    .theme[data-theme="system"] .when-dark {
+      display: none;
+    }
+  }
+
+  .toolbar-button {
+    @apply inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-sm transition-colors;
+    color: var(--color-muted);
+  }
+
+  .toolbar-button:hover {
+    background: var(--color-hover);
+    color: var(--color-ink);
+  }
+
+  .section-title {
+    @apply border-b pb-2 text-xs font-semibold tracking-[0.12em] uppercase;
+    border-color: var(--color-line);
+    color: var(--color-muted);
+  }
+
+  .tag {
+    @apply rounded-full border px-2.5 py-0.5 text-sm;
+    border-color: var(--color-line);
+    background: var(--color-surface);
+    color: var(--color-body);
+  }
+
+  .points {
+    @apply mt-1 grid gap-1.5 leading-relaxed;
+  }
+
+  .points > li {
+    @apply relative pl-4;
+  }
+
+  .points > li::before {
+    @apply absolute left-0;
+    content: "–";
+    color: var(--color-muted);
+  }
+
+  .lock-badge {
+    @apply grid size-9 shrink-0 place-items-center rounded-full;
+    background: var(--color-hover);
+    color: var(--color-ink);
+  }
+
+  .code-field {
+    @apply flex items-center gap-1 rounded-full border p-1 pl-4 transition-colors;
+    border-color: var(--color-line);
+    background: var(--color-paper);
+  }
+
+  .code-field:focus-within {
+    border-color: var(--color-ink);
+  }
+
+  .code-field:has([aria-invalid="true"]) {
+    border-color: var(--color-danger);
+  }
+
+  .code-field input {
+    @apply min-w-0 flex-1 bg-transparent py-1.5 text-sm outline-none;
+    color: var(--color-ink);
+  }
+
+  .code-field input::placeholder {
+    color: var(--color-muted);
+  }
+
+  .code-submit {
+    @apply grid size-8 shrink-0 place-items-center rounded-full transition-opacity;
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .code-submit:hover:not(:disabled) {
+    opacity: 0.85;
+  }
+
+  .code-submit:disabled {
+    opacity: 0.6;
+  }
+
+  .unlocked-dot {
+    @apply size-2 rounded-full;
+    background: var(--color-success);
+  }
+
+  .text-link {
+    @apply font-medium underline underline-offset-3 transition-colors;
+    text-decoration-color: var(--color-line);
+    color: var(--color-ink);
+  }
+
+  .text-link:hover {
+    text-decoration-color: currentColor;
+  }
+
+  /* Placeholder glyphs blurred into a smudge; the real text never reaches the page. */
+  .redacted {
+    filter: blur(0.3em);
+    user-select: none;
+    color: var(--color-ink);
+  }
+
+  /* The locked part of the page: blurred, faded out, and covered by the unlock form. */
+  .locked-region {
+    @apply relative;
+  }
+
+  .locked-content {
+    @apply grid max-h-[36rem] grid-cols-[minmax(0,1fr)] gap-12 overflow-hidden select-none;
+    filter: blur(7px);
+    mask-image: linear-gradient(to bottom, black 30%, transparent 95%);
+  }
+
+  /* A soft wash behind the unlock form keeps it legible over the blurred sections. */
+  .unlock-panel {
+    @apply px-8 py-10;
+    background: radial-gradient(closest-side, var(--color-paper) 55%, transparent);
+  }
+
+  .locked-overlay {
+    @apply absolute inset-0 flex items-start justify-center px-2 pt-16;
+  }
+
+  .revealed {
+    animation: reveal 0.7s ease-out both;
+  }
+}
+
+@keyframes reveal {
+  from {
+    filter: blur(4px);
+    opacity: 0.5;
+  }
+  to {
+    filter: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealed {
+    animation: none;
+  }
+}

@@ -1,0 +1,18 @@
+node_modules
+dist
+.void
+.wrangler
+.cloudflare
+.void-wrangler.jsonc
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+.DS_Store
+
+# Private CV data and source material; published to Cloudflare KV, never committed
+/data/private/
+
+# Editors
+.idea/
+.vscode/
