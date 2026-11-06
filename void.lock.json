@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "source": {
+    "name": "my-cv",
+    "account_id": "fb71c4eceaf623ae1b19b8b37d7a38cf",
+    "compatibility_date": "2026-08-01",
+    "upload_source_maps": true,
+    "workers_dev": false,
+    "preview_urls": false,
+    "routes": [
+      {
+        "pattern": "cv.you-find.me",
+        "custom_domain": true
+      }
+    ],
+    "observability": {
+      "logs": {
+        "enabled": true,
+        "invocation_logs": true
+      }
+    }
+  },
+  "resolved": {
+    "name": "my-cv",
+    "account_id": "fb71c4eceaf623ae1b19b8b37d7a38cf",
+    "compatibility_date": "2026-08-01",
+    "upload_source_maps": true,
+    "workers_dev": false,
+    "preview_urls": false,
+    "routes": [
+      {
+        "pattern": "cv.you-find.me",
+        "custom_domain": true
+      }
+    ],
+    "observability": {
+      "logs": {
+        "enabled": true,
+        "invocation_logs": true
+      }
+    },
+    "kv_namespaces": [
+      {
+        "binding": "KV",
+        "id": "4101895d7dd24062931822748f744155"
+      }
+    ]
+  },
+  "text": "{\n  \"name\": \"my-cv\",\n  \"account_id\": \"fb71c4eceaf623ae1b19b8b37d7a38cf\",\n  \"compatibility_date\": \"2026-08-01\",\n  \"upload_source_maps\": true,\n  \"workers_dev\": false,\n  \"preview_urls\": false,\n  \"routes\": [\n    {\n      \"pattern\": \"cv.you-find.me\",\n      \"custom_domain\": true\n    }\n  ],\n  \"observability\": {\n    \"logs\": {\n      \"enabled\": true,\n      \"invocation_logs\": true\n    }\n  },\n  \"kv_namespaces\": [\n    {\n      \"binding\": \"KV\",\n      \"id\": \"4101895d7dd24062931822748f744155\"\n    }\n  ]\n}\n"
+}
